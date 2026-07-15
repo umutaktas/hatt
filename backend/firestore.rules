@@ -1,0 +1,45 @@
+rules_version = '2';
+
+// Firestore security rules for Hatt (CLAUDE.md §5).
+// - A user may read/write only their own user document.
+// - League standings are world-readable (for the leaderboard) but a member may
+//   write only their own row, and only their weeklyXp within a sane bound and
+//   with a server timestamp. Cohort structure is written by Cloud Functions
+//   (admin) only.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isSelf(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    match /users/{uid} {
+      allow read: if isSelf(uid);
+      // No personal data beyond nickname (§2). Nickname required, real name not.
+      allow create, update: if isSelf(uid)
+        && request.resource.data.nickname is string
+        && request.resource.data.nickname.size() <= 24;
+      allow delete: if false; // deletion goes through the deleteAccount function
+    }
+
+    match /leagues/{weekId}/cohorts/{cohortId} {
+      allow read: if isSignedIn();
+      allow write: if false; // cohorts are managed by Cloud Functions only
+
+      match /members/{uid} {
+        allow read: if isSignedIn();
+        // Client may update its own weeklyXp with an upper bound + server time.
+        // MVP validation (§5): tighten / move fully server-side later.
+        allow update: if isSelf(uid)
+          && request.resource.data.weeklyXp is int
+          && request.resource.data.weeklyXp >= 0
+          && request.resource.data.weeklyXp <= 100000
+          && request.resource.data.updatedAt == request.time;
+        allow create, delete: if false;
+      }
+    }
+  }
+}

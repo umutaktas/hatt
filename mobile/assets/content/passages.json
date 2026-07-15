@@ -1,0 +1,71 @@
+[
+  {
+    "id": "p-gulistan",
+    "title": "Gülistan'dan",
+    "level": 2,
+    "genre": "edebi",
+    "imageAssetPath": null,
+    "lines": [
+      {
+        "id": "p-gulistan-1",
+        "ordinal": 0,
+        "ottoman": "هر نفس که فرو می‌رود",
+        "transliteration": "her nefes ki fürû mî-reved",
+        "simplifiedTr": "İçeri giren her nefes"
+      },
+      {
+        "id": "p-gulistan-2",
+        "ordinal": 1,
+        "ottoman": "ممد حیات است",
+        "transliteration": "mümidd-i hayât est",
+        "simplifiedTr": "hayatı uzatır"
+      }
+    ]
+  },
+  {
+    "id": "p-kitabe",
+    "title": "Bir Çeşme Kitabesi",
+    "level": 1,
+    "genre": "kitabe",
+    "imageAssetPath": null,
+    "lines": [
+      {
+        "id": "p-kitabe-1",
+        "ordinal": 0,
+        "ottoman": "ماشاء الله",
+        "transliteration": "mâşâallah",
+        "simplifiedTr": "Maşallah"
+      },
+      {
+        "id": "p-kitabe-2",
+        "ordinal": 1,
+        "ottoman": "صاحب الخیرات",
+        "transliteration": "sâhibü'l-hayrât",
+        "simplifiedTr": "Hayır sahibi"
+      }
+    ]
+  },
+  {
+    "id": "p-siir",
+    "title": "Bir Beyit",
+    "level": 2,
+    "genre": "siir",
+    "imageAssetPath": null,
+    "lines": [
+      {
+        "id": "p-siir-1",
+        "ordinal": 0,
+        "ottoman": "سنی سویورم",
+        "transliteration": "seni seviyorum",
+        "simplifiedTr": "Seni seviyorum"
+      },
+      {
+        "id": "p-siir-2",
+        "ordinal": 1,
+        "ottoman": "عمر بویو",
+        "transliteration": "ömür boyu",
+        "simplifiedTr": "Ömür boyunca"
+      }
+    ]
+  }
+]

@@ -1,0 +1,17 @@
+# Firebase
+.firebaserc
+.firebase/
+*-debug.log
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Node
+functions/node_modules/
+functions/lib/
+node_modules/
+npm-debug.log
+
+# Secrets
+serviceAccountKey.json
+*.env

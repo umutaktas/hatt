@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <circle cx="60" cy="64" r="40" fill="#E7DEC9" stroke="#2C3A4B" stroke-width="3"/>
+  <rect x="54" y="12" width="12" height="40" rx="4" fill="#B8892B" stroke="#1B2430" stroke-width="2"/>
+  <path d="M42 60 Q48 62 54 60" fill="none" stroke="#1B2430" stroke-width="3" stroke-linecap="round"/>
+  <path d="M66 60 Q72 62 78 60" fill="none" stroke="#1B2430" stroke-width="3" stroke-linecap="round"/>
+  <path d="M52 78 Q60 82 68 78" fill="none" stroke="#1B2430" stroke-width="3" stroke-linecap="round"/>
+  <text x="86" y="40" font-size="14" fill="#2C3A4B">z</text>
+  <text x="96" y="28" font-size="18" fill="#2C3A4B">Z</text>
+</svg>

@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "units": [
+    {
+      "id": "unit-1",
+      "title": "Elifbâ — Temel Harfler",
+      "nodes": [
+        { "id": "u1-l1", "type": "letter", "title": "Elif · Be · Pe · Te", "contentRefs": ["elif", "be", "pe", "te"] },
+        { "id": "u1-l2", "type": "letter", "title": "Se · Cim · Çim · Ha", "contentRefs": ["se", "cim", "chim", "ha"] },
+        { "id": "u1-l3", "type": "letter", "title": "Hı · Dal · Zel · Re", "contentRefs": ["hi", "dal", "zel", "re"] },
+        { "id": "u1-r1", "type": "review", "title": "Tekrar", "contentRefs": [] },
+        { "id": "u1-l4", "type": "letter", "title": "Ze · Je · Sin · Şın", "contentRefs": ["ze", "je", "sin", "shin"] },
+        { "id": "u1-l5", "type": "letter", "title": "Sad · Dad · Tı · Zı", "contentRefs": ["sad", "dad", "ti", "zi"] },
+        { "id": "u1-cp", "type": "checkpoint", "title": "1. Ünite Sınavı", "contentRefs": ["elif", "be", "te", "cim", "dal", "re", "sin", "sad"] }
+      ]
+    },
+    {
+      "id": "unit-2",
+      "title": "İlk Kelimeler",
+      "nodes": [
+        { "id": "u2-l1", "type": "vocab", "title": "Mektep Kelimeleri", "contentRefs": ["kitap", "kalem", "mektep", "ilim"] },
+        { "id": "u2-l2", "type": "vocab", "title": "Şehir ve Vatan", "contentRefs": ["sehir", "selam", "zaman", "vatan"] },
+        { "id": "u2-r1", "type": "review", "title": "Tekrar", "contentRefs": [] },
+        { "id": "u2-l3", "type": "vocab", "title": "Gönül Kelimeleri", "contentRefs": ["gul", "lale", "yar", "can"] },
+        { "id": "u2-l4", "type": "reading", "title": "Kitabe Okuma", "contentRefs": ["p-kitabe"] },
+        { "id": "u2-l5", "type": "vocab", "title": "Nur ve Sabır", "contentRefs": ["dost", "nur", "sabir", "fikir"] },
+        { "id": "u2-cp", "type": "checkpoint", "title": "2. Ünite Sınavı", "contentRefs": ["kitap", "kalem", "sehir", "vatan", "gul", "yar", "nur", "fikir"] }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,322 @@
+[
+  {
+    "id": "kitap",
+    "ottoman": "کتاب",
+    "transliteration": "kitâb",
+    "meaningTr": "kitap",
+    "root": "Ar.",
+    "frequencyRank": 1,
+    "level": 1,
+    "exampleSentence": "بو کتاب گوزل"
+  },
+  {
+    "id": "kalem",
+    "ottoman": "قلم",
+    "transliteration": "kalem",
+    "meaningTr": "kalem",
+    "root": "Ar.",
+    "frequencyRank": 2,
+    "level": 1,
+    "exampleSentence": "قلم ایله یازدم"
+  },
+  {
+    "id": "mektep",
+    "ottoman": "مکتب",
+    "transliteration": "mekteb",
+    "meaningTr": "okul",
+    "root": "Ar.",
+    "frequencyRank": 3,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "ilim",
+    "ottoman": "علم",
+    "transliteration": "ilm",
+    "meaningTr": "bilgi, ilim",
+    "root": "Ar.",
+    "frequencyRank": 4,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "padişah",
+    "ottoman": "پادشاه",
+    "transliteration": "pâdişâh",
+    "meaningTr": "padişah",
+    "root": "Fars.",
+    "frequencyRank": 5,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "şehir",
+    "ottoman": "شهر",
+    "transliteration": "şehir",
+    "meaningTr": "şehir",
+    "root": "Ar.",
+    "frequencyRank": 6,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "selam",
+    "ottoman": "سلام",
+    "transliteration": "selâm",
+    "meaningTr": "selam",
+    "root": "Ar.",
+    "frequencyRank": 7,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "zaman",
+    "ottoman": "زمان",
+    "transliteration": "zamân",
+    "meaningTr": "zaman",
+    "root": "Ar.",
+    "frequencyRank": 8,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "gonul",
+    "ottoman": "کوکل",
+    "transliteration": "gönül",
+    "meaningTr": "gönül",
+    "root": "Türk.",
+    "frequencyRank": 9,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "yar",
+    "ottoman": "یار",
+    "transliteration": "yâr",
+    "meaningTr": "sevgili, dost",
+    "root": "Fars.",
+    "frequencyRank": 10,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "lale",
+    "ottoman": "لاله",
+    "transliteration": "lâle",
+    "meaningTr": "lale",
+    "root": "Fars.",
+    "frequencyRank": 11,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "gul",
+    "ottoman": "کل",
+    "transliteration": "gül",
+    "meaningTr": "gül",
+    "root": "Fars.",
+    "frequencyRank": 12,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "bulbul",
+    "ottoman": "بلبل",
+    "transliteration": "bülbül",
+    "meaningTr": "bülbül",
+    "root": "Fars.",
+    "frequencyRank": 13,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "vatan",
+    "ottoman": "وطن",
+    "transliteration": "vatan",
+    "meaningTr": "vatan",
+    "root": "Ar.",
+    "frequencyRank": 14,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "millet",
+    "ottoman": "ملت",
+    "transliteration": "millet",
+    "meaningTr": "millet",
+    "root": "Ar.",
+    "frequencyRank": 15,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "devlet",
+    "ottoman": "دولت",
+    "transliteration": "devlet",
+    "meaningTr": "devlet",
+    "root": "Ar.",
+    "frequencyRank": 16,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "asker",
+    "ottoman": "عسکر",
+    "transliteration": "asker",
+    "meaningTr": "asker",
+    "root": "Ar.",
+    "frequencyRank": 17,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "hafta",
+    "ottoman": "هفته",
+    "transliteration": "hafta",
+    "meaningTr": "hafta",
+    "root": "Fars.",
+    "frequencyRank": 18,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "cesme",
+    "ottoman": "چشمه",
+    "transliteration": "çeşme",
+    "meaningTr": "çeşme",
+    "root": "Fars.",
+    "frequencyRank": 19,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "hane",
+    "ottoman": "خانه",
+    "transliteration": "hâne",
+    "meaningTr": "ev",
+    "root": "Fars.",
+    "frequencyRank": 20,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "derya",
+    "ottoman": "دریا",
+    "transliteration": "deryâ",
+    "meaningTr": "deniz",
+    "root": "Fars.",
+    "frequencyRank": 21,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "aşk",
+    "ottoman": "عشق",
+    "transliteration": "aşk",
+    "meaningTr": "aşk",
+    "root": "Ar.",
+    "frequencyRank": 22,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "can",
+    "ottoman": "جان",
+    "transliteration": "cân",
+    "meaningTr": "can",
+    "root": "Fars.",
+    "frequencyRank": 23,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "dost",
+    "ottoman": "دوست",
+    "transliteration": "dôst",
+    "meaningTr": "dost",
+    "root": "Fars.",
+    "frequencyRank": 24,
+    "level": 1,
+    "exampleSentence": null
+  },
+  {
+    "id": "nur",
+    "ottoman": "نور",
+    "transliteration": "nûr",
+    "meaningTr": "ışık, nur",
+    "root": "Ar.",
+    "frequencyRank": 25,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "sabir",
+    "ottoman": "صبر",
+    "transliteration": "sabr",
+    "meaningTr": "sabır",
+    "root": "Ar.",
+    "frequencyRank": 26,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "fikir",
+    "ottoman": "فکر",
+    "transliteration": "fikr",
+    "meaningTr": "fikir, düşünce",
+    "root": "Ar.",
+    "frequencyRank": 27,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "hurriyet",
+    "ottoman": "حریت",
+    "transliteration": "hürriyet",
+    "meaningTr": "özgürlük",
+    "root": "Ar.",
+    "frequencyRank": 28,
+    "level": 3,
+    "exampleSentence": null
+  },
+  {
+    "id": "muallim",
+    "ottoman": "معلم",
+    "transliteration": "muallim",
+    "meaningTr": "öğretmen",
+    "root": "Ar.",
+    "frequencyRank": 29,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "talebe",
+    "ottoman": "طلبه",
+    "transliteration": "tâlebe",
+    "meaningTr": "öğrenci",
+    "root": "Ar.",
+    "frequencyRank": 30,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "bahar",
+    "ottoman": "بهار",
+    "transliteration": "bahâr",
+    "meaningTr": "ilkbahar",
+    "root": "Fars.",
+    "frequencyRank": 31,
+    "level": 2,
+    "exampleSentence": null
+  },
+  {
+    "id": "deniz",
+    "ottoman": "دکز",
+    "transliteration": "deñiz",
+    "meaningTr": "deniz",
+    "root": "Türk.",
+    "frequencyRank": 32,
+    "level": 2,
+    "exampleSentence": null
+  }
+]
