@@ -18,11 +18,14 @@ Hangfire (P1'de lig rollover için eklenecek).
 ## Endpoint'ler (P0)
 
 ```
-POST   /v1/auth/anonymous   { installationId, platform }  → access+refresh
-POST   /v1/auth/refresh     { refreshToken }               → rotasyonlu yeni çift
-GET    /v1/me                                              → profil
-PATCH  /v1/me               { nickname }                   → yalnız istemci alanları
-DELETE /v1/account                                         → KVKK tam silme (cascade)
+POST   /v1/auth/anonymous    { installationId, platform }  → access+refresh
+POST   /v1/auth/refresh      { refreshToken }               → rotasyonlu yeni çift
+GET    /v1/me                                               → profil
+PATCH  /v1/me                { nickname }                   → yalnız istemci alanları
+DELETE /v1/account                                          → KVKK tam silme (cascade)
+POST   /v1/lessons/complete  (Idempotency-Key başlığı)      → server-calculated lig XP
+GET    /v1/leagues/current                                  → kohort sıralaması
+GET    /v1/leagues/last-result                              → geçen haftanın sonucu
 GET    /health/live | /health/ready
 ```
 
@@ -51,8 +54,10 @@ değişkenlerinden verilir, repoya asla girmez.
 
 - **P0 ✅** — iskelet, anonim auth + rotating refresh, nickname, KVKK silme,
   rate limit, health, structured log.
-- **P1** — güvenli lig: hafta/cohort/üye şeması, server-calculated XP
-  (idempotent ledger), Hangfire rollover + advisory lock, hafta ortası katılım.
+- **P1 ✅** — güvenli lig: hafta/cohort/üye şeması, server-calculated XP
+  (idempotent `xp_events` ledger'ı, günlük tavan), Hangfire rollover (Pzt 00:00
+  UTC, advisory lock + durum makinesiyle idempotent), lazy cohort (hafta ortası
+  katılım otomatik; rollover maliyeti yalnız aktif oyuncularla ölçeklenir).
 - **P2** — ilerleme yedeği (versiyonlu jsonb snapshot) + account linking
   (e-posta/Apple/Google, aynı user_id).
 - **P3** — rızalı minimal telemetri.
