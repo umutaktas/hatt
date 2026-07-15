@@ -1,17 +1,15 @@
-# Firebase
-.firebaserc
-.firebase/
-*-debug.log
-firebase-debug.log
-firestore-debug.log
-ui-debug.log
+# .NET
+bin/
+obj/
+*.user
+.vs/
+.idea/
 
-# Node
-functions/node_modules/
-functions/lib/
-node_modules/
-npm-debug.log
-
-# Secrets
-serviceAccountKey.json
+# Local secrets — never commit real keys/connection strings
+appsettings.Local.json
 *.env
+
+# Legacy Firebase archive keeps its own ignores
+legacy-firebase/functions/node_modules/
+legacy-firebase/functions/lib/
+legacy-firebase/.firebase/

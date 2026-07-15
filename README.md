@@ -1,62 +1,58 @@
-# Hatt — Backend (Firebase)
+# Hatt — Backend (.NET 9 + PostgreSQL)
 
 Osmanlıca okuma antrenörü **Hatt**'ın backend'i. Kapsam bilinçli olarak küçüktür:
-uygulama **local-first**'tür; backend yalnızca **haftalık lig** ve **hesap/veri
-silme** işlevlerini sağlar (CLAUDE.md §2, §5).
+uygulama **local-first**'tür; backend yalnızca kimlik, (ileride) haftalık lig,
+ilerleme yedeği ve KVKK hesap silme işlevlerini üstlenir.
 
 > Mobil uygulama ayrı depoda: [`umutaktas/hatt.mobile`](https://github.com/umutaktas/hatt.mobile).
+> Mimari karar analizi: `hatt.mobile/docs/ANALIZ-BACKEND-2026-07-16.md`
+> (Firebase bırakıldı; eski içerik `legacy-firebase/` altında arşivdedir).
 
-## İçerik
+## Yığın
 
-```
-firebase.json              Firestore + Functions yapılandırması
-firestore.rules            Güvenlik kuralları (§5)
-firestore.indexes.json     Lig sorguları için indeksler
-.firebaserc.example        Proje kimliği örneği (kopyalayıp .firebaserc yapın)
-functions/
-  src/
-    index.ts               Fonksiyon giriş noktası
-    league.ts              Haftalık lig yenileme (scheduled, Pzt 00:00 UTC)
-    account.ts             KVKK "hesabımı ve verilerimi sil" (callable)
-    week.ts                Hafta anahtarı (mobil ile birebir aynı mantık)
-```
+ASP.NET Core 9 minimal API · EF Core + PostgreSQL · Serilog (structured JSON) ·
+JWT (HS256, 15 dk access) + **rotating refresh token** (yalnız SHA-256 hash
+saklanır, reuse tespitinde token ailesi iptal edilir) · built-in rate limiting ·
+Hangfire (P1'de lig rollover için eklenecek).
 
-## Cloud Functions
-
-- **`rolloverLeagues`** — Cron `0 0 * * 1` (her Pazartesi 00:00 UTC). Biten
-  haftayı sonuçlandırır: her kümeyi haftalık XP'ye göre sıralar, ilk N terfi /
-  son N tenzil (Bronz→Elmas 5 kademe), kullanıcı `tier`'ını yazar, yeni hafta
-  için kümeleri kademeye göre yeniden oluşturur (~25 kişi/küme).
-- **`deleteAccount`** — Kimliği doğrulanmış kullanıcı için `users/{uid}` dokümanı
-  ve Auth hesabını siler. Lig üyelik satırları PII içermez (yalnız takma ad) ve
-  bir sonraki haftalık yenilemede sıfırdan oluşturulur.
-
-## Firestore düzeni
+## Endpoint'ler (P0)
 
 ```
-users/{uid}                                        { nickname, totalXp, streak, tier }
-leagues/{weekId}/cohorts/{cohortId}                { tier, memberCount }
-leagues/{weekId}/cohorts/{cohortId}/members/{uid}  { nickname, weeklyXp, tier }
+POST   /v1/auth/anonymous   { installationId, platform }  → access+refresh
+POST   /v1/auth/refresh     { refreshToken }               → rotasyonlu yeni çift
+GET    /v1/me                                              → profil
+PATCH  /v1/me               { nickname }                   → yalnız istemci alanları
+DELETE /v1/account                                         → KVKK tam silme (cascade)
+GET    /health/live | /health/ready
 ```
 
-## Kurulum ve deploy
+Sunucu sahipli alanlar (tier, XP) istek DTO'larında **yoktur** —
+server-authoritative tasarım (bkz. analiz raporu §5). Lig XP'si P1'de yalnız
+doğrulanmış ders tamamlama olaylarından üretilecek; istemciden toplam kabul eden
+bir endpoint olmayacak.
+
+## Geliştirme
 
 ```bash
-cd functions && npm install && npm run build   # TypeScript derleme
+createdb hatt_dev
+cd src/Hatt.Api
+ASPNETCORE_ENVIRONMENT=Development dotnet run   # migration'lar otomatik uygulanır
+dotnet test                                     # kökten: birim testleri
 
-cp .firebaserc.example .firebaserc             # proje kimliğinizi yazın
-firebase deploy --only firestore:rules
-firebase deploy --only firestore:indexes
-firebase deploy --only functions
-
-# Yerel geliştirme:
-npm run serve                                  # functions emülatörü
+# Yeni migration
+dotnet ef migrations add <Name> -o Data/Migrations
 ```
 
-## Güvenlik kuralları özeti (§5)
+Dev bağlantı dizesi ve imzalama anahtarı `appsettings.Development.json`'da;
+**production'da** `ConnectionStrings__Hatt` ve `Jwt__SigningKey` ortam
+değişkenlerinden verilir, repoya asla girmez.
 
-- Kullanıcı yalnız kendi `users/{uid}` dokümanını okur/yazar; takma ad zorunlu,
-  gerçek ad istenmez.
-- Lig sıralaması giriş yapan herkese okunur; üye yalnız kendi `weeklyXp`'sini,
-  makul üst sınır (≤100000) ve server timestamp ile güncelleyebilir.
-- Küme yapısı yalnızca Cloud Functions (admin) tarafından yazılır.
+## Yol haritası
+
+- **P0 ✅** — iskelet, anonim auth + rotating refresh, nickname, KVKK silme,
+  rate limit, health, structured log.
+- **P1** — güvenli lig: hafta/cohort/üye şeması, server-calculated XP
+  (idempotent ledger), Hangfire rollover + advisory lock, hafta ortası katılım.
+- **P2** — ilerleme yedeği (versiyonlu jsonb snapshot) + account linking
+  (e-posta/Apple/Google, aynı user_id).
+- **P3** — rızalı minimal telemetri.
