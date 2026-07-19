@@ -31,6 +31,9 @@ namespace Hatt.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("MemberCount")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Tier")
                         .IsRequired()
                         .HasMaxLength(16)
@@ -92,6 +95,9 @@ namespace Hatt.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(10)");
 
                     b.Property<DateTimeOffset>("EndsAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset?>("SettledAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTimeOffset>("StartsAt")
@@ -309,9 +315,11 @@ namespace Hatt.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Hatt.Domain.Entities.XpEvent", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<int>("Amount")
                         .HasColumnType("integer");
@@ -325,7 +333,6 @@ namespace Hatt.Infrastructure.Persistence.Migrations
                         .HasColumnType("character varying(64)");
 
                     b.Property<string>("NodeId")
-                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");
 

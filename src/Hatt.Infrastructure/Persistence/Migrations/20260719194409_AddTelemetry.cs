@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -12,35 +11,6 @@ namespace Hatt.Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "SettledAt",
-                table: "LeagueWeeks");
-
-            migrationBuilder.DropColumn(
-                name: "MemberCount",
-                table: "LeagueCohorts");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "NodeId",
-                table: "XpEvents",
-                type: "character varying(64)",
-                maxLength: 64,
-                nullable: false,
-                defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "character varying(64)",
-                oldMaxLength: 64,
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "XpEvents",
-                type: "uuid",
-                nullable: false,
-                oldClrType: typeof(long),
-                oldType: "bigint")
-                .OldAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
             migrationBuilder.AddColumn<DateTimeOffset>(
                 name: "LastXpAt",
                 table: "LeagueMembers",
@@ -105,38 +75,6 @@ namespace Hatt.Infrastructure.Persistence.Migrations
             migrationBuilder.DropColumn(
                 name: "CreatedAt",
                 table: "LeagueCohorts");
-
-            migrationBuilder.AlterColumn<string>(
-                name: "NodeId",
-                table: "XpEvents",
-                type: "character varying(64)",
-                maxLength: 64,
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "character varying(64)",
-                oldMaxLength: 64);
-
-            migrationBuilder.AlterColumn<long>(
-                name: "Id",
-                table: "XpEvents",
-                type: "bigint",
-                nullable: false,
-                oldClrType: typeof(Guid),
-                oldType: "uuid")
-                .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            migrationBuilder.AddColumn<DateTimeOffset>(
-                name: "SettledAt",
-                table: "LeagueWeeks",
-                type: "timestamp with time zone",
-                nullable: true);
-
-            migrationBuilder.AddColumn<int>(
-                name: "MemberCount",
-                table: "LeagueCohorts",
-                type: "integer",
-                nullable: false,
-                defaultValue: 0);
         }
     }
 }

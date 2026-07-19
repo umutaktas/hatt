@@ -20,6 +20,7 @@ public class LeagueWeek
     public DateTimeOffset StartsAt { get; set; }
     public DateTimeOffset EndsAt { get; set; }
     public LeagueWeekStatus Status { get; set; } = LeagueWeekStatus.Active;
+    public DateTimeOffset? SettledAt { get; set; }
 }
 
 public class LeagueCohort
@@ -28,6 +29,7 @@ public class LeagueCohort
     public string WeekId { get; set; } = null!;
     public LeagueWeek Week { get; set; } = null!;
     public LeagueTier Tier { get; set; }
+    public int MemberCount { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
 }
 
@@ -49,14 +51,14 @@ public class LeagueMember
 
 public class XpEvent
 {
-    public Guid Id { get; set; }
+    public long Id { get; set; }
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
     public string WeekId { get; set; } = null!;
 
     public string SourceType { get; set; } = null!;
     public string IdempotencyKey { get; set; } = null!;
-    public string NodeId { get; set; } = null!;
+    public string? NodeId { get; set; }
 
     public int Amount { get; set; }
     public DateTimeOffset CreatedAt { get; set; }
