@@ -8,12 +8,12 @@ ilerleme yedeği ve KVKK hesap silme işlevlerini üstlenir.
 > Mimari karar analizi: `hatt.mobile/docs/ANALIZ-BACKEND-2026-07-16.md`
 > (Firebase bırakıldı; eski içerik `legacy-firebase/` altında arşivdedir).
 
-## Yığın
+## Yığın ve Mimari (Clean Architecture)
 
-ASP.NET Core 9 minimal API · EF Core + PostgreSQL · Serilog (structured JSON) ·
-JWT (HS256, 15 dk access) + **rotating refresh token** (yalnız SHA-256 hash
-saklanır, reuse tespitinde token ailesi iptal edilir) · built-in rate limiting ·
-Hangfire (P1'de lig rollover için eklenecek).
+- **`Hatt.Domain`**: Saf Varlıklar (`User`, `LeagueMember`, `UserIdentity`), Enuml'lar, Domain kuralları (`VerifiedXpCalculator`, `WeekService`, `CohortSettlement`).
+- **`Hatt.Application`**: DTO'lar, Soyutlamalar (`ITokenService`, `IPasswordHasher`).
+- **`Hatt.Infrastructure`**: EF Core + PostgreSQL (`HattDbContext`, Migration'lar), `TokenService` (JWT), `PasswordHasherService`, `LeagueService`, `LeagueRolloverJob` (Hangfire).
+- **`Hatt.Api`**: ASP.NET Core 9 Minimal API Endpoint eşlemeleri (`AuthEndpoints`, `UserEndpoints`, `LeagueEndpoints`, `ProgressEndpoints`), Serilog, Rate Limiting, Health Checks.
 
 ## Endpoint'ler (P0)
 
@@ -58,6 +58,6 @@ değişkenlerinden verilir, repoya asla girmez.
   (idempotent `xp_events` ledger'ı, günlük tavan), Hangfire rollover (Pzt 00:00
   UTC, advisory lock + durum makinesiyle idempotent), lazy cohort (hafta ortası
   katılım otomatik; rollover maliyeti yalnız aktif oyuncularla ölçeklenir).
-- **P2** — ilerleme yedeği (versiyonlu jsonb snapshot) + account linking
-  (e-posta/Apple/Google, aynı user_id).
-- **P3** — rızalı minimal telemetri.
+- **P2 ✅** — ilerleme yedeği (versiyonlu jsonb snapshot sync, GET/PUT `/v1/progress`) + account linking
+  (e-posta/Apple/Google, anonim hesabı bağlama, `POST /v1/account/link/*`, `POST /v1/auth/login/*`).
+- **P3 ✅** — rızalı minimal telemetri (`POST /v1/telemetry/events` whitelist'li batching, PII/free-text engelleme, Serilog & PostgreSQL saklama).

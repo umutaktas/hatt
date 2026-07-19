@@ -1,10 +1,11 @@
 using System.Threading.RateLimiting;
 using Hangfire;
 using Hangfire.PostgreSql;
-using Hatt.Api.Auth;
-using Hatt.Api.Data;
-using Hatt.Api.Leagues;
-using Hatt.Api.Users;
+using Hatt.Api.Endpoints;
+using Hatt.Application.Abstractions;
+using Hatt.Application.DTOs;
+using Hatt.Infrastructure.Persistence;
+using Hatt.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Structured JSON logs (ops requirement, P0).
+// Structured JSON logs (ops requirement).
 builder.Host.UseSerilog((context, config) => config
     .ReadFrom.Configuration(context.Configuration)
     .Enrich.FromLogContext()
@@ -28,10 +29,12 @@ if (string.IsNullOrEmpty(jwtOptions.SigningKey))
 
 builder.Services.AddSingleton(jwtOptions);
 builder.Services.AddSingleton(TimeProvider.System);
-builder.Services.AddSingleton<TokenService>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
+builder.Services.AddSingleton<IPasswordHasher, PasswordHasherService>();
 
 builder.Services.AddDbContext<HattDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Hatt")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Hatt"),
+        b => b.MigrationsAssembly(typeof(HattDbContext).Assembly.FullName)));
 
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -39,7 +42,7 @@ builder.Services
         options.TokenValidationParameters = TokenService.ValidationParameters(jwtOptions));
 builder.Services.AddAuthorization();
 
-// Fixed-window rate limit on auth endpoints (brute-force / token spam guard).
+// Fixed-window rate limit on auth endpoints.
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -56,7 +59,7 @@ builder.Services.AddRateLimiter(options =>
 builder.Services.AddScoped<LeagueService>();
 builder.Services.AddScoped<LeagueRolloverJob>();
 
-// Hangfire: weekly league rollover (Monday 00:00 UTC), Postgres-backed.
+// Hangfire
 builder.Services.AddHangfire(config => config
     .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
     .UseSimpleAssemblyNameTypeSerializer()
@@ -81,9 +84,9 @@ app.MapHealthChecks("/health/ready");
 app.MapAuthEndpoints();
 app.MapUserEndpoints();
 app.MapLeagueEndpoints();
+app.MapProgressEndpoints();
+app.MapTelemetryEndpoints();
 
-// Dev convenience: apply migrations on startup outside Production, and expose
-// a manual rollover trigger for local end-to-end verification.
 if (!app.Environment.IsProduction())
 {
     using var scope = app.Services.CreateScope();

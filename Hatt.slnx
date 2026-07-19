@@ -1,6 +1,9 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Hatt.Api/Hatt.Api.csproj" />
+    <Project Path="src/Hatt.Application/Hatt.Application.csproj" />
+    <Project Path="src/Hatt.Domain/Hatt.Domain.csproj" />
+    <Project Path="src/Hatt.Infrastructure/Hatt.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Hatt.Api.Tests/Hatt.Api.Tests.csproj" />

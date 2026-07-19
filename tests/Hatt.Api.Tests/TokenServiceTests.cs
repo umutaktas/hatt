@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
-using Hatt.Api.Auth;
+using Hatt.Application.DTOs;
+using Hatt.Infrastructure.Services;
 using Microsoft.Extensions.Time.Testing;
 
 namespace Hatt.Api.Tests;
@@ -47,7 +48,7 @@ public class TokenServiceTests
 
         Assert.NotEqual(token1, token2);
         Assert.NotEqual(hash1, hash2);
-        Assert.DoesNotContain(token1, hash1); // hash reveals nothing
+        Assert.DoesNotContain(token1, hash1);
         Assert.Equal(TokenService.HashToken(token1), hash1);
         Assert.Equal(_clock.GetUtcNow().AddDays(60), expires1);
     }

@@ -12,4 +12,6 @@ appsettings.Local.json
 # Legacy Firebase archive keeps its own ignores
 legacy-firebase/functions/node_modules/
 legacy-firebase/functions/lib/
-legacy-firebase/.firebase/
+# OS
+.DS_Store
+*.DS_Store

@@ -1,5 +1,5 @@
-using Hatt.Api.Data;
-using Hatt.Api.Leagues;
+using Hatt.Domain.Entities;
+using Hatt.Domain.Services;
 
 namespace Hatt.Api.Tests;
 
