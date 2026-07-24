@@ -72,6 +72,7 @@ public static class LeagueEndpoints
             var now = clock.GetUtcNow();
             var weekId = WeekService.WeekId(now);
             var member = await league.EnsureMembershipAsync(user, weekId, now, ct);
+            await db.SaveChangesAsync(ct);
 
             var standings = await db.LeagueMembers
                 .Where(m => m.CohortId == member.CohortId)
